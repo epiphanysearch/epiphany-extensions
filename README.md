@@ -27,8 +27,8 @@ By design, if someone wanted the very latest changes in their project, they will
 
 ## Future Plans
 
-- [ ] Re-write Epiphany SEO extensions after having a better understanding of Umbraco (new repository)
-- [ ] Add an asset folder containing things like `SiteMap.cshtml` partial, `GoogleSiteMap.cshtml` partial, etc.
-- [ ] Detector.cs
-- [ ] YouTubePicker.cs / YouTubeSelector.cs
-- [ ] SendEmailWithFileLink.cs (requires Contour)
+- Re-write Epiphany SEO extensions after having a better understanding of Umbraco (new repository)
+- Add an asset folder containing things like `SiteMap.cshtml` partial, `GoogleSiteMap.cshtml` partial, etc.
+- Detector.cs
+- YouTubePicker.cs / YouTubeSelector.cs
+- SendEmailWithFileLink.cs (requires Contour)
