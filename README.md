@@ -6,7 +6,7 @@ A collection of utility methods that are common and useful in all Epiphany Umbra
 
 ### Instructions
 
-    git submodule add https://github.com/epiphanysearch/epiphany-extensions.git epiphany-extensions
+    git submodule add -b master https://github.com/epiphanysearch/epiphany-extensions.git epiphany-extensions
     <Use VS to add the project within the folder to your solution>
     <Add a reference to the project to your main project>
     <Add and commit everything to your project>
