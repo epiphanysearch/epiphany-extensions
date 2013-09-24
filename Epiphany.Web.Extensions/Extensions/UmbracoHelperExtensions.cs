@@ -41,9 +41,9 @@ namespace RunForAll.Web.Extensions
         /// <summary>
         /// Return an Umbraco pre-value as a IHtmlString
         /// </summary>
-        /// <param name="helper"></param>
-        /// <param name="val"></param>
-        /// <returns></returns>
+        /// <param name="helper">UmbracoHelper to extend</param>
+        /// <param name="val">Pre-value ID</param>
+        /// <returns>IHtmlString relating to the pre-value</returns>
         public static IHtmlString PreValue(this UmbracoHelper helper, int val)
         {
             return new MvcHtmlString(umbraco.library.GetPreValueAsString(val));
