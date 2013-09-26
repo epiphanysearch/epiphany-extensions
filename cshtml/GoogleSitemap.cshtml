@@ -1,0 +1,47 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = null;
+	Response.ContentType = "text/xml";
+    _maxDepth = Model.Content.GetPropertyValue("sitemapDepth", true, 4);
+    var exclusions = new string[] { "GoogleSitemap" }; 
+}<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    @ListChildNodes(Model.Content.AncestorOrSelf(1))    
+</urlset>
+
+@helper ListChildNodes(IPublishedContent startNode)
+{   
+    foreach (var node in startNode.Children.Where(c => c.IsVisible() && !.Contains(c.DocumentTypeAlias)))
+    {
+        <url>
+            <loc>@GetUrlWithDomainPrefix(node.Url)</loc>
+            <lastmod>@(string.Format("{0:s}+00:00", node.UpdateDate))</lastmod>
+
+            @if (node.HasProperty("googlePriority") && !String.IsNullOrWhiteSpace(node.GetPropertyValue<string>("googlePriority")))
+            {
+                <priority>@(node.GetPropertyValue<string>("googlePriority"))</priority>
+            }
+        </url>
+        if (node.Level <= _maxDepth && node.Children.Any())
+        {
+            @ListChildNodes(node)
+        }
+    }
+}
+
+@functions {
+    private int _maxDepth = 0;
+    
+    private static string GetUrlWithDomainPrefix(string url)
+    {
+        if (url.StartsWith("/"))
+            url = url.Substring(1);
+
+        var domainPrefix = string.Format("http://{0}/", HttpContext.Current.Request.ServerVariables["HTTP_HOST"]);
+
+        if (url.StartsWith(domainPrefix))
+            return url;
+        else
+            return domainPrefix + url;
+    }
+}
