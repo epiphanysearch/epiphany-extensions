@@ -1,0 +1,44 @@
+﻿@using Epiphany.Web.Extensions
+@using Umbraco.Core
+@inherits UmbracoTemplatePage
+
+@functions
+{
+    // here for scope
+    private int _maxDepth = 0;
+}
+@{
+    Layout = null;
+
+    _maxDepth = Model.Content.GetPropertyValue("sitemapDepth", true, 4);
+    var root = Model.Content.AncestorOrSelf(1);
+    var exclusions = new string[] { "GoogleSitemap" };
+}
+
+<ul class="sitemap-list">
+    @DrawSiteMap(root)
+</ul>
+
+@helper DrawSiteMap(IPublishedContent page)
+{
+    var name = page.GetPropertyValue<string>("navigationText", page.Name);   
+    <li>
+        <a href="@page.Url()">@name</a>
+        
+        @if (page.Level < _maxDepth)
+        {
+            var children = page.Children
+                               .Where(a => a.IsVisible() && !exclusions.Contains(a.DocumentTypeAlias))
+                               .ToList();
+            if (children.Any())
+            {
+                <ul>
+                    @foreach (var child in children)
+                    {
+                        @DrawSiteMap(child)
+                    }
+                </ul>
+            }
+        }
+    </li>
+}
