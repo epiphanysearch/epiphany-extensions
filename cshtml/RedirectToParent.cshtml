@@ -1,0 +1,14 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    var parent = Model.Content.Parent;
+    while (true)
+    {
+        if (parent.TemplateId > 0 && parent.TemplateId != Model.Content.TemplateId) 
+        {
+            break;
+        }
+        parent = parent.Parent;
+    }
+    
+    Response.RedirectPermanent(parent.Url());
+}
