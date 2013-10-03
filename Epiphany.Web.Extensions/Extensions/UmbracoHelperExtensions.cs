@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Umbraco.Web;
 using uComponents.DataTypes.UrlPicker;
 
-namespace RunForAll.Web.Extensions
+namespace Epiphany.Web.Extensions
 {
     public static class UmbracoHelperExtensions
     {
