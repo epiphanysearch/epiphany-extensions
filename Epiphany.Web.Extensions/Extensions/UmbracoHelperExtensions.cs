@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using Umbraco.Web;
 using uComponents.DataTypes.UrlPicker;
+using Umbraco.Web;
 
-namespace RunForAll.Web.Extensions
+namespace Epiphany.Web.Extensions
 {
     public static class UmbracoHelperExtensions
     {
